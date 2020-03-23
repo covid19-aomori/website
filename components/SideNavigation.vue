@@ -13,7 +13,7 @@
           <img
             class="SideNavigation-HeaderLogo"
             src="/logo.svg"
-            :alt="$t('東京都')"
+            :alt="$t('青森県')"
           />
           <div class="SideNavigation-HeaderText">
             {{ $t('menu/新型コロナウイルス感染症') }}<br />{{
@@ -39,15 +39,16 @@
           v-if="this.$i18n.locales.length > 1"
           class="SideNavigation-Language"
         >
-          <label class="SideNavigation-LanguageLabel" for="LanguageSelector">
+          <!-- <label class="SideNavigation-LanguageLabel" for="LanguageSelector">
             {{ $t('多言語対応選択メニュー') }}
           </label>
-          <LanguageSelector />
+          <LanguageSelector /> -->
         </div>
       </nav>
 
       <footer class="SideNavigation-Footer">
         <div class="SideNavigation-Social">
+          <!--
           <a
             href="https://line.me/R/ti/p/%40822sysfc"
             target="_blank"
@@ -59,8 +60,9 @@
               <img src="/line.png" alt="LINE" />
             </picture>
           </a>
+          -->
           <a
-            href="https://twitter.com/tokyo_bousai"
+            href="https://twitter.com/AomoriPref"
             target="_blank"
             rel="noopener"
             class="SideNavigation-SocialLink"
@@ -70,6 +72,7 @@
               <img src="/twitter.png" alt="Twitter" />
             </picture>
           </a>
+          <!--
           <a
             href="https://www.facebook.com/tochokoho"
             target="_blank"
@@ -81,8 +84,9 @@
               <img src="/facebook.png" alt="Facebook" />
             </picture>
           </a>
+          -->
           <a
-            href="https://github.com/tokyo-metropolitan-gov/covid19"
+            href="https://github.com/covid19-aomori/website"
             target="_blank"
             rel="noopener"
             class="SideNavigation-SocialLink"
@@ -105,7 +109,7 @@
           </a>
           {{ $t('の下に提供されています。') }}
           <br />
-          2020 Tokyo Metropolitan Government
+          2020 Aomori Hackers
         </small>
       </footer>
     </div>
@@ -115,7 +119,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { TranslateResult } from 'vue-i18n'
-import LanguageSelector from '@/components/LanguageSelector.vue'
+// import LanguageSelector from '@/components/LanguageSelector.vue'
 import MenuList from '@/components/MenuList.vue'
 
 type Item = {
@@ -127,7 +131,7 @@ type Item = {
 
 export default Vue.extend({
   components: {
-    LanguageSelector,
+    // LanguageSelector,
     MenuList
   },
   props: {
@@ -141,57 +145,56 @@ export default Vue.extend({
       return [
         {
           icon: 'mdi-chart-timeline-variant',
-          title: this.$t('都内の最新感染動向'),
+          title: this.$t('県内の最新感染動向'),
           link: this.localePath('/')
         },
-        {
-          icon: 'CovidIcon',
-          title: this.$t('新型コロナウイルス感染症が心配なときに'),
-          link: this.localePath('/flow'),
-          divider: true
-        },
-        {
-          icon: 'ParentIcon',
-          title: this.$t('お子様をお持ちの皆様へ'),
-          link: this.localePath('/parent')
-        },
-        {
-          icon: 'mdi-account-multiple',
-          title: this.$t('都民の皆様へ'),
-          link: 'https://www.metro.tokyo.lg.jp/tosei/tosei/news/2019-ncov.html'
-        },
-        {
-          icon: 'mdi-domain',
-          title: this.$t('企業の皆様・はたらく皆様へ'),
-          link: this.localePath('/worker'),
-          divider: true
-        },
-        {
-          title: this.$t('東京都新型コロナウイルス感染症対策本部報'),
-          link:
-            'https://www.bousai.metro.tokyo.lg.jp/taisaku/saigai/1007261/index.html'
-        },
-        {
-          title: this.$t('東京都主催等 中止又は延期するイベント等'),
-          link:
-            'https://www.seisakukikaku.metro.tokyo.lg.jp/information/event00.html'
-        },
+        // {
+        //   icon: 'CovidIcon',
+        //   title: this.$t('新型コロナウイルス感染症が心配なときに'),
+        //   link: this.localePath('/flow'),
+        //   divider: true
+        // },
+        // {
+        //   icon: 'ParentIcon',
+        //   title: this.$t('お子様をお持ちの皆様へ'),
+        //   link: this.localePath('/parent')
+        // },
+        // {
+        //   icon: 'mdi-account-multiple',
+        //   title: this.$t('都民の皆様へ'),
+        //   link: 'https://www.metro.tokyo.lg.jp/tosei/tosei/news/2019-ncov.html'
+        // },
+        // {
+        //   icon: 'mdi-domain',
+        //   title: this.$t('企業の皆様・はたらく皆様へ'),
+        //   link: this.localePath('/worker'),
+        //   divider: true
+        // },
+        // {
+        //   title: this.$t('青森県新型コロナウイルス感染症対策本部報'),
+        //   link:
+        //     'https://www.bousai.metro.tokyo.lg.jp/taisaku/saigai/1007261/index.html'
+        // },
+        // {
+        //   title: this.$t('青森県主催等 中止又は延期するイベント等'),
+        //   link:
+        //     'https://www.seisakukikaku.metro.tokyo.lg.jp/information/event00.html'
+        // },
         {
           title: this.$t('知事からのメッセージ'),
-          link:
-            'https://www.metro.tokyo.lg.jp/tosei/governor/governor/katsudo/2020/03/03_00.html'
+          link: 'https://www.pref.aomori.lg.jp/koho/R020228message.html'
         },
         {
           title: this.$t('当サイトについて'),
           link: this.localePath('/about')
         },
+        // {
+        //   title: this.$t('お問い合わせ先一覧'),
+        //   link: this.localePath('/contacts')
+        // },
         {
-          title: this.$t('お問い合わせ先一覧'),
-          link: this.localePath('/contacts')
-        },
-        {
-          title: this.$t('東京都公式ホームページ'),
-          link: 'https://www.metro.tokyo.lg.jp/'
+          title: this.$t('青森県公式ホームページ'),
+          link: 'https://www.pref.aomori.lg.jp/index.html'
         }
       ]
     }
@@ -216,10 +219,9 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .SideNavigation {
   position: relative;
-  height: 100%;
-  background: $white;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
-
+  @include lessThan($small) {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  }
   &:focus {
     outline: 1px dotted $gray-3;
   }
@@ -318,6 +320,10 @@ export default Vue.extend({
   @include lessThan($tiny) {
     width: 100px;
   }
+
+  @media screen and (max-width: 480px) {
+    width: 10rem;
+  }
 }
 
 .SideNavigation-HeaderText {
@@ -329,11 +335,15 @@ export default Vue.extend({
   @include lessThan($tiny) {
     margin: 0;
   }
+
+  @media screen and (max-width: 480px) {
+    margin-left: 0;
+    font-size: 0.7rem;
+  }
 }
 
 .SideNavigation-Body {
   padding: 0 20px 20px;
-  background-color: $white;
   @include lessThan($small) {
     display: none;
     padding: 0 36px 36px;
@@ -371,7 +381,6 @@ export default Vue.extend({
 
 .SideNavigation-Footer {
   padding-top: 20px;
-  background-color: $white;
 }
 
 .SideNavigation-Social {
