@@ -39,7 +39,8 @@
                 "年代": "70代",
                 "性別": "男性",
                 "退院": null,
-                "date": "2020-03-23"
+                "date": "2020-03-23",
+                "source": "https://www.pref.aomori.lg.jp/soshiki/kenko/hoken/files/200323press.pdf"
             },
             {
                 "リリース日": "2020-03-23T09:00:00.000Z",
@@ -47,7 +48,8 @@
                 "年代": "70代",
                 "性別": "女性",
                 "退院": null,
-                "date": "2020-03-23"
+                "date": "2020-03-23",
+                "source": "https://www.pref.aomori.lg.jp/soshiki/kenko/hoken/files/200323press.pdf"
             },
             {
                 "リリース日": "2020-03-25T09:00:00.000Z",
@@ -55,7 +57,8 @@
                 "年代": "60代",
                 "性別": "男性",
                 "退院": null,
-                "date": "2020-03-25"
+                "date": "2020-03-25",
+                "source": "https://www.pref.aomori.lg.jp/soshiki/kenko/hoken/files/200325press.pdf"
             },
             {
                 "リリース日": "2020-03-25T09:00:00.000Z",
@@ -63,7 +66,8 @@
                 "年代": "60代",
                 "性別": "女性",
                 "退院": null,
-                "date": "2020-03-25"
+                "date": "2020-03-25",
+                "source": "https://www.pref.aomori.lg.jp/soshiki/kenko/hoken/files/200325press.pdf"
             },
             {
                 "リリース日": "2020-03-25T09:00:00.000Z",
@@ -71,7 +75,8 @@
                 "年代": "70代",
                 "性別": "女性",
                 "退院": null,
-                "date": "2020-03-25"
+                "date": "2020-03-25",
+                "source": "https://www.pref.aomori.lg.jp/soshiki/kenko/hoken/files/200325press.pdf"
             },
             {
                 "リリース日": "2020-03-25T09:00:00.000Z",
@@ -79,7 +84,8 @@
                 "年代": "70代",
                 "性別": "女性",
                 "退院": null,
-                "date": "2020-03-25"
+                "date": "2020-03-25",
+                "source": "https://www.pref.aomori.lg.jp/soshiki/kenko/hoken/files/200325press.pdf"
             },
             {
                 "リリース日": "2020-03-28T09:00:00.000Z",
@@ -87,7 +93,8 @@
                 "年代": "30代",
                 "性別": "女性",
                 "退院": null,
-                "date": "2020-03-28"
+                "date": "2020-03-28",
+                "source": "https://www.pref.aomori.lg.jp/soshiki/kenko/hoken/files/200328press.pdf"
             }
         ]
     },
