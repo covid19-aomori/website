@@ -12,6 +12,7 @@
       :height="240"
       :fixed-header="true"
       :mobile-breakpoint="0"
+      :options.sync="options"
       class="cardTable"
     >
       <template v-slot:item.source="{ item }">
@@ -120,6 +121,10 @@ export default Vue.extend({
     url: {
       type: String,
       default: ''
+    },
+    options: {
+      type: Object,
+      default: () => {}
     }
   },
   mounted() {

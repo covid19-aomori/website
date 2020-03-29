@@ -8,6 +8,7 @@
       :date="Data.patients.date"
       :info="sumInfoOfPatients"
       :url="'https://covid19-aomori.info/dataset/t000010d0000000068'"
+      :options="options"
     />
   </v-col>
 </template>
@@ -60,10 +61,16 @@ export default {
       }
     }
 
+    const options = {
+      sortBy: ['公表日'],
+      sortDesc: [true]
+    }
+
     const data = {
       Data,
       patientsTable,
-      sumInfoOfPatients
+      sumInfoOfPatients,
+      options
     }
     return data
   }
