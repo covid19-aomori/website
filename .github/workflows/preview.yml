@@ -30,11 +30,11 @@ jobs:
       - run: yarn run test
       - run: yarn run generate:deploy --fail-on-page-error
 
-      - name: Deploy
-        uses: actions/aws/cli@master
+      - name: Install aws-cli
+        uses: chrislennon/action-aws-cli@v1.1
+      - name: Deploy preview page
+        run: aws s3 sync dist s3://covid19-aomori-production-preview/${GITHUB_SHA} --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ap-northeast-1
-        with:
-          args: s3 sync dist s3://covid19-aomori-production-preview/${GITHUB_SHA} --delete
