@@ -1,4 +1,4 @@
-name: reviewdog
+name: preview-page
 
 on:
   - push
