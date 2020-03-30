@@ -41,8 +41,11 @@
     "cross-env": "^5.2.0",
     "dayjs": "^1.8.21",
     "express": "^4.16.4",
+    "fs": "0.0.1-security",
     "nuxt": "^2.11.0",
     "nuxt-i18n": "^6.6.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
     "vue-chartjs": "^3.5.0",
     "vue-scrollto": "^2.17.1",
     "vue-spinner": "^1.0.3"
