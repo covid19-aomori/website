@@ -1,5 +1,10 @@
 <template>
-  <data-view :title="title" :title-id="titleId" :date="date">
+  <data-view
+    :title="title"
+    :title-id="titleId"
+    :date="date"
+    class="TimeStackedBarChart"
+  >
     <template v-slot:button>
       <ul :class="$style.GraphDesc">
         <li>
@@ -17,6 +22,13 @@
         </li>
         <li>
           {{ $t('（注）3/23の件数はそれまでの累計です') }}
+        </li>
+        <li>
+          {{
+            $t(
+              '（注）青森県の発表日基準でのグラフとなるため土日などはまとめて週明けにカウントされます'
+            )
+          }}
         </li>
       </ul>
       <data-selector
@@ -56,6 +68,14 @@
     </template>
   </data-view>
 </template>
+
+<style lang="scss">
+.TimeStackedBarChart {
+  .DataSelector button:first-child {
+    display: none !important;
+  }
+}
+</style>
 
 <script lang="ts">
 import Vue from 'vue'
@@ -188,7 +208,7 @@ const options: ThisTypedComponentOptionsWithRecordProps<
     }
   },
   data: () => ({
-    dataKind: 'transition',
+    dataKind: 'cumulative',
     canvas: true
   }),
   computed: {
