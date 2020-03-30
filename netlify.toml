@@ -2,3 +2,6 @@
   from = "/*"
   to = "/404.html"
   status = 404
+
+[[plugins]]
+package = "./plugins/netlify-plugin-fetch-data-source"
