@@ -50,4 +50,4 @@ workflows:
       - deploy_preview:
           filters:
             branches:
-              ignore: master
+              only: development
