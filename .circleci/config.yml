@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  pr-comment: benjlevesque/pr-comment@0.1.4
 executors:
   default:
     docker:
@@ -38,7 +40,12 @@ jobs:
           command: yarn run generate:deploy --fail-on-page-error
       - run:
           name: deploy
-          command: npx netlify-cli deploy --dir=./dist
+          command: |
+            npx netlify-cli deploy --dir=./dist --json | jq -r '.deploy_url' > deploy_url.txt
+            echo "export DEPLOY_URL=`cat deploy_url.txt`" >> $BASH_ENV
+            source $BASH_ENV
+      - pr-comment:
+          comment: ${DEPLOY_URL}
 
 workflows:
   deploy:
