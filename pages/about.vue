@@ -191,7 +191,7 @@
       </p>
     </StaticCard>
     <StaticCard>
-      <h3>{{ $t('私達について') }}</h3>
+      <h3 id="our-team">{{ $t('私達について') }}</h3>
       <img src="/aomorihackers-logo.svg" alt="AomoriHackers" />
       <p>
         {{
