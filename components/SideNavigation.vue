@@ -97,7 +97,14 @@
             </picture>
           </a>
         </div>
-        <img src="/aomorihackers-logo.svg" alt="AomoriHackers" class="mt-4" />
+        <nuxt-link :to="localePath('/about#our-team')">
+          <img
+            src="/aomorihackers-logo.svg"
+            alt="AomoriHackers"
+            class="mt-4"
+            @click="$emit('closeNavi', $event)"
+          />
+        </nuxt-link>
         <small class="SideNavigation-Copyright">
           {{ $t('このサイトの内容物は') }}
           <a
