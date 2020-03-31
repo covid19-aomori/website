@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  pr-comment: benjlevesque/pr-comment@0.1.4
+  slack: circleci/slack@3.4.2
 executors:
   default:
     docker:
@@ -23,6 +23,9 @@ jobs:
       - run:
           name: deploy
           command: npx netlify-cli deploy --dir=./dist --prod
+      - slack/status:
+          success_message: ":circleci-pass: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。\ndeploy_url: https://covid19-aomori.info/"
+          failure_message: ":circleci-fail: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
 
   deploy_preview:
     executor:
@@ -42,10 +45,11 @@ jobs:
           name: deploy
           command: |
             npx netlify-cli deploy --dir=./dist --json | jq -r '.deploy_url' > deploy_url.txt
-            echo "export DEPLOY_URL=`cat deploy_url.txt`" >> $BASH_ENV
+            echo "export DEPLOY_URL=$(cat deploy_url.txt)" >> $BASH_ENV
             source $BASH_ENV
-      - pr-comment:
-          comment: ${DEPLOY_URL}
+      - slack/status:
+          success_message: ":circleci-pass: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。\ndeploy_url: ${DEPLOY_URL}"
+          failure_message: ":circleci-fail: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
 
 workflows:
   deploy:
