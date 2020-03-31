@@ -1,16 +1,20 @@
 version: 2.1
-jobs:
-  deploy_prod:
+executors:
+  default:
     docker:
       - image: circleci/node:10
+jobs:
+  deploy_prod:
+    executor:
+      name: default
     steps:
       - checkout
       - run:
           name: install-packages
           command: yarn install --frozen-lockfile
       - run:
-        name: fetch-latest-data
-        command: curl -s https://covid19-aomori-production-dataset-store.s3-ap-northeast-1.amazonaws.com/data.json > data/data.json
+          name: fetch-latest-data
+          command: curl -s https://covid19-aomori-production-dataset-store.s3-ap-northeast-1.amazonaws.com/data.json > data/data.json
       - run:
           name: generate
           command: yarn run generate:deploy --fail-on-page-error
@@ -19,16 +23,16 @@ jobs:
           command: npx netlify-cli deploy --dir=./dist --prod
 
   deploy_preview:
-    docker:
-      - image: circleci/node:10
+    executor:
+      name: default
     steps:
       - checkout
       - run:
           name: install-packages
           command: yarn install --frozen-lockfile
       - run:
-        name: fetch-latest-data
-        command: curl -s https://covid19-aomori-production-dataset-store.s3-ap-northeast-1.amazonaws.com/data.json > data/data.json
+          name: fetch-latest-data
+          command: curl -s https://covid19-aomori-production-dataset-store.s3-ap-northeast-1.amazonaws.com/data.json > data/data.json
       - run:
           name: generate
           command: yarn run generate:deploy --fail-on-page-error
