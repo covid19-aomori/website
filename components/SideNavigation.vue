@@ -97,6 +97,7 @@
             </picture>
           </a>
         </div>
+        <img src="/aomorihackers-logo.svg" alt="AomoriHackers" class="mt-4" />
         <small class="SideNavigation-Copyright">
           {{ $t('このサイトの内容物は') }}
           <a
@@ -109,7 +110,7 @@
           </a>
           {{ $t('の下に提供されています。') }}
           <br />
-          2020 Aomori Hackers
+          2020 AomoriHackers
         </small>
       </footer>
     </div>
@@ -392,6 +393,7 @@ export default Vue.extend({
 
 .SideNavigation-Social {
   display: flex;
+  justify-content: center;
 }
 
 .SideNavigation-SocialLink {
