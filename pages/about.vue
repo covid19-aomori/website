@@ -190,6 +190,29 @@
         </i18n>
       </p>
     </StaticCard>
+    <StaticCard>
+      <h3>{{ $t('私達について') }}</h3>
+      <img src="/aomorihackers-logo.svg" alt="AomoriHackers" />
+      <p>
+        {{
+          $t(
+            '私達は、青森県内のIT関係者を中心に構成されています。新型コロナウイルス感染者が青森県で確認された2020年3月23日に有志が集結し「AomoriHackers」を結成しました。'
+          )
+        }}
+      </p>
+      <p>
+        {{
+          $t(
+            'このサイトはその翌日に公開され、その後、このサイトの運営をおこなっています。'
+          )
+        }}
+      </p>
+      <p>
+        {{ $t('連絡先') }}:
+        <br />
+        <a href="mailto:covid19.aomori@gmail.com">covid19.aomori@gmail.com</a>
+      </p>
+    </StaticCard>
   </div>
 </template>
 
