@@ -1,0 +1,64 @@
+version: 2.1
+orbs:
+  slack: circleci/slack@3.4.2
+executors:
+  default:
+    docker:
+      - image: circleci/node:10
+jobs:
+  deploy_prod:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run:
+          name: install-packages
+          command: yarn install --frozen-lockfile
+      - run:
+          name: fetch-latest-data
+          command: curl -s https://covid19-aomori-production-dataset-store.s3-ap-northeast-1.amazonaws.com/data.json > data/data.json
+      - run:
+          name: generate
+          command: yarn run generate:deploy --fail-on-page-error
+      - run:
+          name: deploy
+          command: npx netlify-cli deploy --dir=./dist --prod
+      - slack/status:
+          success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。 <https://covid19-aomori.info/|https://covid19-aomori.info/>"
+          failure_message: ":x: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
+
+  deploy_preview:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run:
+          name: install-packages
+          command: yarn install --frozen-lockfile
+      - run:
+          name: fetch-latest-data
+          command: curl -s https://covid19-aomori-production-dataset-store.s3-ap-northeast-1.amazonaws.com/data.json > data/data.json
+      - run:
+          name: generate
+          command: yarn run generate:deploy --fail-on-page-error
+      - run:
+          name: deploy
+          command: |
+            npx netlify-cli deploy --dir=./dist --json | jq -r '.deploy_url' > deploy_url.txt
+            echo "export DEPLOY_URL=$(cat deploy_url.txt)" >> $BASH_ENV
+            source $BASH_ENV
+      - slack/status:
+          success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。 <${DEPLOY_URL}|Preview Page>"
+          failure_message: ":x: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
+
+workflows:
+  deploy:
+    jobs:
+      - deploy_prod:
+          filters:
+            branches:
+              only: master
+      - deploy_preview:
+          filters:
+            branches:
+              ignore: master
