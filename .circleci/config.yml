@@ -24,7 +24,7 @@ jobs:
           name: deploy
           command: npx netlify-cli deploy --dir=./dist --prod
       - slack/status:
-          success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。\nSite URL: https://covid19-aomori.info/"
+          success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。\n<https://covid19-aomori.info/|https://covid19-aomori.info/>"
           failure_message: ":x: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
 
   deploy_preview:
@@ -48,7 +48,7 @@ jobs:
             echo "export DEPLOY_URL=$(cat deploy_url.txt)" >> $BASH_ENV
             source $BASH_ENV
       - slack/status:
-          success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。\nPreview URL: ${DEPLOY_URL}"
+          success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。\n<${DEPLOY_URL}|Preview Page>"
           failure_message: ":x: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
 
 workflows:
