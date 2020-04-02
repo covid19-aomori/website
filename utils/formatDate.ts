@@ -17,3 +17,14 @@ export const convertDatetimeToISO8601Format = (dateString: string): string => {
 export const convertDateToISO8601Format = (dateString: string): string => {
   return dayjs(dateString).format('YYYY-MM-DD')
 }
+
+/**
+ * @param dateString - Parsable string by dayjs
+ * @param delimiter - default is '/'
+ */
+export const convertDateToNonZeroMonthAndDayFormat = (
+  dateString: string,
+  delimiter = '/'
+): string => {
+  return dayjs(dateString).format(`M${delimiter}D`)
+}
