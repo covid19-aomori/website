@@ -24,6 +24,7 @@
 <script>
 import Data from '@/data/data.json'
 import TimeStackedBarChart from '@/components/TimeStackedBarChart.vue'
+import { convertDateToNonZeroMonthAndDayFormat } from '@/utils/formatDate'
 
 export default {
   components: {
@@ -39,7 +40,9 @@ export default {
       this.$t('県内発生（※1）'),
       this.$t('その他（※2）')
     ]
-    const inspectionsLabels = Data.inspections_summary.labels
+    const inspectionsLabels = Data.inspections_summary.labels.map(label =>
+      convertDateToNonZeroMonthAndDayFormat(label)
+    )
     const inspectionsDataLabels = [this.$t('県内'), this.$t('その他.graph')]
 
     const data = {
