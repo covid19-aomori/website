@@ -1,5 +1,7 @@
 # 青森県 新型コロナウイルス感染症対策サイト
 
+[![CircleCI](https://circleci.com/gh/covid19-aomori/website/tree/master.svg?style=svg)](https://circleci.com/gh/covid19-aomori/website)
+
 ## ライセンス
 本ソフトウェアは、[MITライセンス](./LICENSE.txt)の元提供されています。
 
