@@ -201,8 +201,8 @@ export default Vue.extend({
         //   link: this.localePath('/contacts')
         // },
         {
-          title: this.$t('青森県公式ホームページ'),
-          link: 'https://www.pref.aomori.lg.jp/index.html'
+          title: this.$t('青森県からの新型コロナウイルス感染症についての情報'),
+          link: 'https://www.pref.aomori.lg.jp/koho/coronavirus_index.html'
         },
         {
           title: this.$t('各市区町村のリンク'),
