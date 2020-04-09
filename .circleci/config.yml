@@ -22,7 +22,7 @@ jobs:
           command: yarn run generate:deploy --fail-on-page-error
       - run:
           name: deploy
-          command: npx netlify-cli deploy --dir=./dist --prod
+          command: npx netlify-cli@v2.41.0 deploy --dir=./dist --prod
       - slack/status:
           success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。 <https://covid19-aomori.info/|https://covid19-aomori.info/>"
           failure_message: ":x: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
@@ -44,7 +44,7 @@ jobs:
       - run:
           name: deploy
           command: |
-            npx netlify-cli deploy --dir=./dist --json | jq -r '.deploy_url' > deploy_url.txt
+            npx netlify-cli@v2.41.0 deploy --dir=./dist --json | jq -r '.deploy_url' > deploy_url.txt
             echo "export DEPLOY_URL=$(cat deploy_url.txt)" >> $BASH_ENV
             source $BASH_ENV
       - slack/status:
