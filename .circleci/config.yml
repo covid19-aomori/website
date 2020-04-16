@@ -18,6 +18,12 @@ jobs:
           name: fetch-latest-data
           command: curl -s https://covid19-aomori-production-dataset-store.s3-ap-northeast-1.amazonaws.com/data.json > data/data.json
       - run:
+          name: fetch-latest-news
+          command: |
+            sudo apt-get install nkf -y
+            chmod +x scripts/get_news.sh
+            scripts/get_news.sh > data/news.json
+      - run:
           name: generate
           command: yarn run generate:deploy --fail-on-page-error
       - run:
