@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # 接続先
 URL="https://siftrss.com/f/eqMXvvMA8gR"
