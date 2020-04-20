@@ -1,10 +1,5 @@
 <template>
-  <data-view
-    :title="title"
-    :title-id="titleId"
-    :date="date"
-    class="TimeStackedBarChart"
-  >
+  <data-view :title="title" :title-id="titleId" :date="date">
     <template v-slot:button>
       <ul :class="$style.GraphDesc">
         <li>
@@ -68,14 +63,6 @@
     </template>
   </data-view>
 </template>
-
-<style lang="scss">
-.TimeStackedBarChart {
-  .DataSelector button:first-child {
-    display: none !important;
-  }
-}
-</style>
 
 <script lang="ts">
 import Vue from 'vue'
