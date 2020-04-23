@@ -32,11 +32,10 @@ export default {
   data() {
     // 検査実施日別状況
     const inspectionsGraph = [
-      Data.inspections_summary.data['県内'],
-      [parseInt(Data.inspections_summary.data['その他'].shift()) + 94].concat(
-        Data.inspections_summary.data['その他']
-      )
-      // Data.inspections_summary.data['その他']
+      [parseInt(Data.inspections_summary.data['県内'].shift()) + 94].concat(
+        Data.inspections_summary.data['県内']
+      ),
+      Data.inspections_summary.data['その他']
     ]
     const inspectionsItems = [
       this.$t('県内発生（※1）'),
