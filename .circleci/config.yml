@@ -80,3 +80,12 @@ workflows:
           filters:
             branches:
               ignore: master
+  schedule_deploy:
+    triggers:
+      - schedule:
+          cron: "0 * * * *"
+          filters:
+            branches:
+              only: master
+    jobs:
+      - deploy_prod
