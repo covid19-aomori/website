@@ -5,6 +5,8 @@ executors:
   default:
     docker:
       - image: circleci/node:10
+    environment:
+      TZ: Asia/Tokyo
 jobs:
   deploy_prod:
     executor:
