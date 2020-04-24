@@ -15,15 +15,14 @@
       :options.sync="options"
       class="cardTable"
     >
+      <!--
       <template v-slot:item.source="{ item }">
         <a v-if="item.source" :href="item.source" target="_blank" rel="noopener"
           >リンク</a
         >
       </template>
+    -->
     </v-data-table>
-    <div class="note">
-      {{ $t('※退院には、死亡退院を含む') }}
-    </div>
     <template v-slot:infoPanel>
       <data-view-basic-info-panel
         :l-text="info.lText"

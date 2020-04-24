@@ -7,7 +7,7 @@
       :chart-option="{}"
       :date="Data.patients.date"
       :info="sumInfoOfPatients"
-      :url="'https://covid19-aomori.info/dataset/t000010d0000000068'"
+      :url="'https://opendata.pref.aomori.lg.jp/dataset/1531.html'"
       :options="options"
     />
   </v-col>
@@ -43,15 +43,17 @@ export default {
     for (const header of patientsTable.headers) {
       header.text =
         header.value === '退院' ? this.$t('退院※') : this.$t(header.value)
+      /*
       header.text =
         header.value === 'source' ? this.$t('情報元') : this.$t(header.value)
+      */
     }
     // 陽性患者の属性 中身の翻訳
     for (const row of patientsTable.datasets) {
       row['居住地'] = this.$t(row['居住地'])
       row['性別'] = this.$t(row['性別'])
       row['退院'] = this.$t(row['退院'])
-      row.source = this.$t(row.source)
+      // row.source = this.$t(row.source)
 
       if (row['年代'] === '10歳未満') {
         row['年代'] = this.$t('10歳未満')

@@ -1,13 +1,13 @@
 <template>
   <v-col cols="12" md="6" class="DataCard">
     <time-bar-chart
-      :title="$t('新型コロナコールセンター相談件数')"
+      :title="$t('コールセンター相談件数')"
       :title-id="'number-of-reports-to-covid19-telephone-advisory-center'"
       :chart-id="'time-bar-chart-contacts'"
       :chart-data="contactsGraph"
       :date="Data.contacts.date"
       :unit="$t('件.reports')"
-      :url="'https://covid19-aomori.info/dataset/t000010d0000000071'"
+      :url="'https://opendata.pref.aomori.lg.jp/dataset/1531.html'"
     />
     <!-- 件.reports = 窓口相談件数 -->
   </v-col>
