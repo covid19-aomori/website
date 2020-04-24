@@ -85,7 +85,7 @@ workflows:
   schedule_deploy:
     triggers:
       - schedule:
-          cron: "0 0-15/3 * * *"
+          cron: "0 0,3,8,13 * * *"
           filters:
             branches:
               only: master
