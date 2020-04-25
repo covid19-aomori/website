@@ -4,48 +4,49 @@ orbs:
 executors:
   default:
     docker:
-      - image: circleci/node:10
+      - image: cimg/node:10.20.1
     environment:
       TZ: Asia/Tokyo
-jobs:
-  deploy_prod:
-    executor:
-      name: default
+
+commands:
+  install-node-packages:
     steps:
-      - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ arch }}-{{ checksum "yarn.lock" }}
       - run:
           name: install-packages
           command: yarn install --frozen-lockfile
-      - run:
-          name: fetch-latest-data
-          command: |
-            curl -sL https://github.com/covid19-aomori/go-datasetgen/releases/latest/download/datasetgen_Linux_x86_64 -o datasetgen
-            chmod +x datasetgen
-            ./datasetgen > data/data.json
-      - run:
-          name: fetch-latest-news
-          command: |
-            sudo apt-get install nkf -y
-            chmod +x scripts/get_news.sh
-            scripts/get_news.sh > data/news.json
-      - run:
-          name: generate
-          command: yarn run generate:deploy --fail-on-page-error
-      - run:
-          name: deploy
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-npm-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+  deploy-prod:
+    steps:
+      - deploy:
+          name: deploy app into production
           command: npx netlify-cli@v2.41.0 deploy --dir=./dist --prod
       - slack/status:
           success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。 <https://covid19-aomori.info/|https://covid19-aomori.info/>"
           failure_message: ":x: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
+  deploy-preview:
+    steps:
+      - deploy:
+          name: deploy app into preview
+          command: |
+            npx netlify-cli@v2.41.0 deploy --dir=./dist --json | jq -r '.deploy_url' > deploy_url.txt
+            echo "export DEPLOY_URL=$(cat deploy_url.txt)" >> $BASH_ENV
+      - slack/status:
+          success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。 <${DEPLOY_URL}|Preview Page>"
+          failure_message: ":x: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
 
-  deploy_preview:
+jobs:
+  deploy:
     executor:
       name: default
     steps:
       - checkout
-      - run:
-          name: install-packages
-          command: yarn install --frozen-lockfile
+      - install-node-packages
       - run:
           name: fetch-latest-data
           command: |
@@ -61,24 +62,21 @@ jobs:
       - run:
           name: generate
           command: yarn run generate:deploy --fail-on-page-error
-      - run:
-          name: deploy
-          command: |
-            npx netlify-cli@v2.41.0 deploy --dir=./dist --json | jq -r '.deploy_url' > deploy_url.txt
-            echo "export DEPLOY_URL=$(cat deploy_url.txt)" >> $BASH_ENV
-            source $BASH_ENV
-      - slack/status:
-          success_message: ":white_check_mark: ${CIRCLE_BRANCH} ブランチのデプロイが完了しました。 <${DEPLOY_URL}|Preview Page>"
-          failure_message: ":x: ${CIRCLE_BRANCH} ブランチのデプロイが失敗しました。"
 
 workflows:
   deploy:
     jobs:
-      - deploy_prod:
+      - deploy:
+          name: deploy-prod
+          post-steps:
+            - deploy-prod
           filters:
             branches:
               only: master
-      - deploy_preview:
+      - deploy:
+          name: deploy-preview
+          post-steps:
+            - deploy-preview
           filters:
             branches:
               ignore: master
@@ -90,4 +88,7 @@ workflows:
             branches:
               only: master
     jobs:
-      - deploy_prod
+      - deploy:
+          name: scheduled-deploy-prod
+          post-steps:
+            - deploy-prod
