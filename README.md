@@ -7,6 +7,8 @@
 
 ## 開発者向け情報
 
+![構成図](documents/covid19-aomori-min.png)
+
 ### 環境構築の手順
 
 - 必要となるNode.jsのバージョン: 10.19.0以上
